@@ -1,4 +1,6 @@
 import { Router, Request, Response, NextFunction } from 'express';
+import * as passport from 'passport';
+
 const Orgs = require("./../../data/data");
 
 export class OrgRouter {
@@ -14,7 +16,10 @@ export class OrgRouter {
     }
 
     init() {
-        this.router.get('/', this.getAll);
+        this.router.get(
+            '/',
+            //passport.authenticate('local'),
+            this.getAll);
     }
 }
 
