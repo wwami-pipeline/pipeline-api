@@ -1,7 +1,8 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import * as passport from 'passport';
+import { isNumber } from 'util';
 
-const Orgs = require("./../../data/data");
+var Orgs = require("./../../data/orgs.json");
 
 export class OrgRouter {
     router: Router
@@ -12,7 +13,41 @@ export class OrgRouter {
     }
 
     public getAll(req: Request, res: Response, next: NextFunction) {
+        res.setHeader('Content-type', 'application/json');
         res.send(Orgs);
+        res.end();
+    }
+
+    public getById(req: Request, res: Response, next: NextFunction) {       
+        var param = req.params.orgID;
+
+        var org = Orgs.filter(org => org.OrgID == param)
+
+        if (org.length != 1) {
+            res.setHeader('Content-Type', 'text/plain');
+            res.status(404).
+                send('org not found');
+            res.end();
+            return;
+        }
+
+        res.setHeader('Content-Type', 'application/json');
+        res.send(org[0]);
+        res.end();
+    }
+
+    public updateByName(req: Request, res: Response, next: NextFunction) {
+        var param = req.params.orgName;
+
+        var org = Orgs.filter(org => org.OrgTitle == param)
+
+        if (org.length != 1) {
+            res.setHeader('Content-Type', 'text/plain');
+            res.status(404).
+                send('org not found');
+            res.end();
+            return;
+        }
     }
 
     init() {
@@ -20,6 +55,14 @@ export class OrgRouter {
             '/',
             //passport.authenticate('local'),
             this.getAll);
+
+        this.router.get(
+            '/:orgID',
+            this.getById);
+        
+        this.router.patch(
+            '/:orgName',
+            this.updateByName);
     }
 }
 

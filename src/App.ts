@@ -75,7 +75,7 @@ class App {
       });
     });
     this.express.use('/', router);
-    this.express.use('/api/v1/orgs', passport.authenticate('local'), OrgRouter);
+    this.express.use('/api/v1/orgs', OrgRouter);
   }
 
 }

@@ -1,5 +1,6 @@
 [
     {
+        "OrgID": 1,
         "OrgTitle": "Pre-Health Professions Advising Program",
         "OrgEmail": "pre-health@uidaho.edu",
         "OrgWebsite": "www.uidaho.edu/pre-health",
@@ -8,16 +9,16 @@
         "State": "Idaho",
         "ZIP": "83844-2436",
         "Phone": "(208)885-5809",
-        "BrochureLink": "",
+        "BrochureLink":"",
         "ActivityDesc": "We provide support to students, including visiting high school/prospective students, current undergraduate and post-bacc students, and alumni, from a wide range of geographic locations.",
-        "HasSelfPlacement": true,
-        "HasVolunteers": true,
-        "AverageEnrollment": 100,
-        "TransportationStatus": true,
-        "ProgramCost": 100,
-        "HasAcademicCredit": true,
-        "HasShadowing": true,
-        "HasShadowingApplication": true,
-        "ShadowingEducationLevel": 5
+        "HasSelfPlacement":true,
+        "HasVolunteers":true,
+        "AverageEnrollment":100,
+        "TransportationStatus":true,
+        "ProgramCost":100,
+        "HasAcademicCredit":true,
+        "HasShadowing":true,
+        "HasShadowingApplication":true,
+        "ShadowingEducationLevel":5
     }
 ]
