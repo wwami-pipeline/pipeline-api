@@ -13,8 +13,7 @@ export class OrgRouter {
     }
 
     public getAll(req: Request, res: Response, next: NextFunction) {
-        res.setHeader('Content-type', 'application/json');
-        res.send(Orgs);
+        res.json(Orgs);
         res.end();
     }
 
@@ -64,6 +63,8 @@ export class OrgRouter {
             res.end();
             return;
         }
+
+
     }
 
     init() {
