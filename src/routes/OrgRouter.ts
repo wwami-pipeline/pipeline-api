@@ -31,8 +31,24 @@ export class OrgRouter {
             return;
         }
 
-        res.setHeader('Content-Type', 'application/json');
-        res.send(org[0]);
+        res.json(org[0]);
+        res.end();
+    }
+
+    public getByName(req: Request, res: Response, next: NextFunction) {
+        var param = req.params.orgName;
+
+        var org = Orgs.filter(org => org.OrgName == param)
+
+        if (org.length != 1) {
+            res.setHeader('Content-Type', 'text/plain');
+            res.status(404).
+                send('org not found');
+            res.end();
+            return;
+        }
+
+        res.json(org[0]);
         res.end();
     }
 
