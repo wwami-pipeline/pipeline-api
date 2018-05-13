@@ -3,7 +3,6 @@ import json
 import numpy as np
 
 csv_input = pd.read_csv('pipelineaddress.csv', encoding="ISO-8859-1")
-#print(csv_input)
 j = []
 org = {}
 csv_input = csv_input.fillna('')
@@ -56,6 +55,5 @@ for index, row in csv_input.iterrows():
     j.append(org)
     org = {}
 
-print(j)
 with open('orgs.json', 'w') as outfile:
     json.dump(j, outfile)
