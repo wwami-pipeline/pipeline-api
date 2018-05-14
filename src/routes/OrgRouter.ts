@@ -55,19 +55,7 @@ export class OrgRouter {
         var searchJSON = req.body;
         var myLat = 47.65718;
         var myLong = -122.31835;
-        /*
-        if (searchJSON['location'].length > 0) {
-            location = searchJSON['location'];
 
-        } else {
-            res.setHeader('Content-Type', 'text/plain');
-            res.status(400).
-                send('location required');
-            res.end();
-            return;
-        }*/
-        //var closestOrgs = Orgs.filter(org => this.distance(myLat, myLong, org.Lat, org.Long) < 10.0);
-        //res.json(closestOrgs);
         var results = [];
         for (var i = 0; i < Orgs.length; i++) {
             var R = 3959;
@@ -85,27 +73,29 @@ export class OrgRouter {
                 results.push(Orgs[i]);
             }
         }
+        
+        if (searchJSON['GradeLevels']) {
+            results = results.filter(result => result.GradeLevels.toString == searchJSON['GradeLevels'].toString());
+        }
+
+        if (searchJSON['HasCost']) {
+            results = results.filter(result => result.HasCost == searchJSON['HasCost']);
+        }
+
+        if (searchJSON['HasTransport']) {
+            results = results.filter(result => result.HasTransport == searchJSON['HasTransport']);
+        }
+
+        if (searchJSON['CareerEmp']) {
+            results = results.filter(result => result.CareerEmp.toString() == searchJSON['CareerEmp'].toString());
+        }
+
+        if (searchJSON['Under18']) {
+            results = results.filter(result => result.Under18 == searchJSON['Under18']);
+        }
+
         res.json(results);
         res.end();
-
-    }
-
-    public distance(initialLat: number, initialLong: number, destLat: number, destLong: number) {
-        var R = 3959;
-        var distanceLat = this.toRadians(destLat - initialLat);
-        var distanceLong = this.toRadians(destLong - initialLong);
-
-        initialLat = this.toRadians(initialLat);
-        destLat = this.toRadians(destLat);
-
-        var a = Math.sin(distanceLat / 2) * Math.sin(distanceLat / 2) + Math.sin(distanceLong / 2) *
-            Math.sin(distanceLong / 2) * Math.cos(initialLat) * Math.cos(destLat);
-        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        return R * c;
-    }
-
-    public toRadians(degree: number) {
-        return degree * (Math.PI / 180);
     }
 
     init() {
