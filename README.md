@@ -14,7 +14,7 @@ API is deployed using Docker.
 ## Setup
 Clone the Repository.
 
-Running locally:
+Running locally:<br/>
 Setup should be as easy as pulling the repo and running `npm install` to get all the dependencies. There are two scripts that have been written
 for ease of use:
 * `npm run build`: runs the gulp scripts specified in gulpfile.js. Will transpile everything into the `build` folder.
