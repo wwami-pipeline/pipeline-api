@@ -1,12 +1,22 @@
 import pandas as pd
 import json
 import numpy as np
+import googlemaps
 
-csv_input = pd.read_csv('pipelineaddress.csv', encoding="ISO-8859-1")
+gmaps = googlemaps.Client(key='AIzaSyDp-LsNg9RusqlMLx2K9_VXXWudUk2-d6c')
+
+
+csv_input = pd.read_csv('pipelinesurveydata.csv', encoding="ISO-8859-1")
+
+csv_input['Full Address'] = csv_input['street_address_1'] + ", " + \
+    csv_input['org_city'] + ", " + \
+    csv_input['org_state'] + " " + csv_input['zip_code']
+
 j = []
 org = {}
 csv_input = csv_input.fillna('')
 for index, row in csv_input.iterrows():
+    result = gmaps.geocode(row['Full Address'])
     org['OrgID'] = row['participant_id']
     org['OrgTitle'] = row['org_name']
     org['OrgWebsite'] = row['org_website']
@@ -17,9 +27,8 @@ for index, row in csv_input.iterrows():
     org['Phone'] = row['org_phone_number']
     org['Email'] = row['org_email']
     org['ActivityDesc'] = row['description']
-    org['Lat'] = row['Latitude']
-    org['Long'] = row['Longitude']
-    org['HasShadow'] = True
+    org['Lat'] = result[0]['geometry']['location']['lat']
+    org['Long'] = result[0]['geometry']['location']['lng']
     org['HasShadow'] = bool(row['has_shadow'] == 1)
     org['HasCost'] = bool(row['has_cost'] == 1)
     org['HasTransport'] = bool(row['provides_transportation'] == 1)
