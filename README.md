@@ -21,21 +21,21 @@ for ease of use:
 * `npm start`: starts the express server on port 3000
 
 Running on server:
-    - Create DockerHub account at https://hub.docker.com
-    - Compile and transpile using `npm run build`
-    - Build Docker container with command `docker build -t <YOUR DOCKERHUB USERNAME>/pipelineapi .`
-    - Push docker container to Dockerhub with command `docker push <YOUR DOCKERHUB USERNAME>/pipelineapi`
-    - SSH into server at nwhealthcareerpath.uw.edu
-    - Pull docker container with command `docker pull <YOUR DOCKERHUB USERNAME>/pipelineapi`
-    - Clean any untagged images with command `docker image prune -f`
-    - Run API with command:
-      ```
-      docker run -d \
-      -p 127.0.0.1:4001:4001 \
-      --network pipeline \
-      --name pipelineapi \
-      -e PORT=4001 \
-      <YOUR DOCKERHUB USERNAME>/pipelineapi
-      ```
-    - You may need sudo privileges to run these commands.
+* Create DockerHub account at https://hub.docker.com
+* Compile and transpile using `npm run build`
+* Build Docker container with command `docker build -t <YOUR DOCKERHUB USERNAME>/pipelineapi .`
+* Push docker container to Dockerhub with command `docker push <YOUR DOCKERHUB USERNAME>/pipelineapi`
+* SSH into server at nwhealthcareerpath.uw.edu
+* Pull docker container with command `docker pull <YOUR DOCKERHUB USERNAME>/pipelineapi`
+* Clean any untagged images with command `docker image prune -f`
+* Run API with command:
+```
+docker run -d \
+-p 127.0.0.1:4001:4001 \
+--network pipeline \
+--name pipelineapi \
+-e PORT=4001 \
+<YOUR DOCKERHUB USERNAME>/pipelineapi
+```
+* You may need sudo privileges to run these commands.
 
